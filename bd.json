@@ -1,0 +1,39 @@
+{
+  "machines": [
+    {
+      "code": "LVM-001",
+      "model": "Brastemp BWK11",
+      "year": 2021,
+      "available": true,
+      "reservedBy": null
+    },
+    {
+      "code": "LVM-002",
+      "model": "Electrolux LAC11",
+      "year": 2020,
+      "available": true,
+      "reservedBy": null
+    },
+    {
+      "code": "LVM-003",
+      "model": "Consul CWH12",
+      "year": 2022,
+      "available": true,
+      "reservedBy": null
+    },
+    {
+      "code": "LVM-004",
+      "model": "Samsung WW11",
+      "year": 2023,
+      "available": true,
+      "reservedBy": null
+    },
+    {
+      "code": "LVM-005",
+      "model": "LG FV3011",
+      "year": 2019,
+      "available": true,
+      "reservedBy": null
+    }
+  ]
+}
