@@ -3,9 +3,15 @@
 App Android + Web (Expo SDK 57 + Expo Router) para gerenciar a lavanderia comunitária de um condomínio.
 O morador lê o QR Code da máquina (Android) ou digita o código (Android e Web), vê se ela está livre e reserva ou libera a máquina.
 
-- **Login e cadastro com cookie** usando a API do professor (`https://login-p26w.onrender.com/fatec/login/v1`)
-- **Recurso nativo:** câmera lendo QR Code (`expo-camera`), só no Android
-- **Dados das máquinas:** mockados em `bd.json` e salvos no AsyncStorage do aparelho
+## Telas na versão web
+
+| **Login** | **Cadastro** |
+|:---:|:---:|
+| <img width="900" src="https://github.com/user-attachments/assets/c96db4e5-b2ad-4ab1-a3aa-c8404ae2d8b6"> | <img width="900" src="https://github.com/user-attachments/assets/c0a1b950-f749-42b3-8a22-4acb57c33d9c"> |
+
+| **Home** | **Perfil** |
+|:---:|:---:|
+| <img width="900" src="https://github.com/user-attachments/assets/7405ceea-cc30-4321-b6b2-e350b772f137"> | <img width="900" src="https://github.com/user-attachments/assets/d7c5dc57-8dd4-4a73-8aba-c9808d326c55"> |
 
 ---
 
