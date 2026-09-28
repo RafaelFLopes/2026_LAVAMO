@@ -24,7 +24,7 @@ export function AuthLayout({ title, subtitle, children }: Props) {
       <View style={[styles.flex, isWide && styles.row]}>
         {isWide && (
           <View style={styles.brandPanel}>
-            <Logo height={90} />
+            <Logo height={260} variant="p" />
             <Text style={styles.brandSlogan}>
               A lavanderia do seu condomínio, sem filas e sem surpresas.
             </Text>

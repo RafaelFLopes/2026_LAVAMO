@@ -1,20 +1,22 @@
 import { Image } from 'react-native';
 
-// Logo oficial (logotipo com o nome). Para trocar, substitua assets/images/logo-lavamo.png.
-const logoImage = require('@assets/images/logo-lavamo.png');
+const logoDefault = require('@assets/images/logo-lavamo.png');
+const logoP = require('@assets/images/logo-lavamo-p.png');
 
-// Proporção original da imagem (1680 x 569): a largura acompanha a altura sem distorcer.
 const LOGO_RATIO = 1680 / 569;
 
 type Props = {
   height?: number;
+  variant?: 'default' | 'p';
 };
 
-export function Logo({ height = 40 }: Props) {
+export function Logo({ height = 40, variant = 'p' }: Props) {
+  const source = variant === 'default' ? logoDefault : logoP;
+
   return (
     <Image
-      source={logoImage}
-      style={{ height, width: height * LOGO_RATIO }}
+      source={source}
+      style={{ height, width: height * LOGO_RATIO, maxWidth: '100%' }}
       resizeMode="contain"
       accessibilityLabel="Lavamo"
     />
