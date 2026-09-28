@@ -4,18 +4,6 @@ App Android + Web (Expo SDK 57 + Expo Router) para gerenciar a lavanderia comuni
 O morador lê o QR Code da máquina (Android) ou digita o código (Android e Web), vê se ela está livre e reserva ou libera a máquina.
 
 
-<img width="1080" height="2316" alt="Screenshot_20260927_225413_Expo Go" src="https://github.com/user-attachments/assets/918b2c91-d5c1-4613-b185-fd52193e4523" />
-
-
-<img width="1080" height="2316" alt="Screenshot_20260927_225424_Expo Go" src="https://github.com/user-attachments/assets/e9f21901-861e-4235-b9ba-5de9e4d674f7" />
-
-<img width="1080" height="2316" alt="Screenshot_20260927_225433_Expo Go" src="https://github.com/user-attachments/assets/e9974772-e791-4a2f-b6e3-fd06da229986" />
-
-<img width="1080" height="2316" alt="Screenshot_20260927_225441_Expo Go" src="https://github.com/user-attachments/assets/da746c7a-05f9-45c8-96e2-cba041c6f1cd" />
-
-
-
-
 ## Telas na versão web
 
 | **Login** | **Cadastro** |
@@ -26,7 +14,14 @@ O morador lê o QR Code da máquina (Android) ou digita o código (Android e Web
 |:---:|:---:|
 | <img width="900" src="https://github.com/user-attachments/assets/7405ceea-cc30-4321-b6b2-e350b772f137"> | <img width="900" src="https://github.com/user-attachments/assets/d7c5dc57-8dd4-4a73-8aba-c9808d326c55"> |
 
+
+## Telas na versão app
+
+| **Câmera QR Code** | **Reservar Máquina** | **Home** | **Perfil** |
+|:---:|:---:|:---:|:---:|
+| <img width="250" src="https://github.com/user-attachments/assets/918b2c91-d5c1-4613-b185-fd52193e4523"> | <img width="250" src="https://github.com/user-attachments/assets/e9f21901-861e-4235-b9ba-5de9e4d674f7"> | <img width="250" src="https://github.com/user-attachments/assets/e9974772-e791-4a2f-b6e3-fd06da229986"> | <img width="250" src="https://github.com/user-attachments/assets/da746c7a-05f9-45c8-96e2-cba041c6f1cd"> |
 ---
+
 
 ## Estrutura de Pastas
 
