@@ -10,8 +10,8 @@ type Props = {
   variant?: 'default' | 'p';
 };
 
-export function Logo({ height = 40, variant = 'p' }: Props) {
-  const source = variant === 'default' ? logoDefault : logoP;
+export function Logo({ height = 40, variant = 'default' }: Props) {
+  const source = variant === 'p' ? logoP : logoDefault;
 
   return (
     <Image
