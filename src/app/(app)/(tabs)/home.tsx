@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuthCookie } from '@/context/AuthCookieContext';
 import { getMyReservation } from '@/integration/machineIntegration';
 import { Machine } from '@/@types/machine';
+import { formatCountdown, useCountdown } from '@/hooks/useCountdown';
 import { Card } from '@/components/card';
 import { Button } from '@/components/button';
 import { Logo } from '@/components/logo';
@@ -25,16 +26,23 @@ export default function Home() {
     const [reservation, setReservation] = useState<Machine | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    const loadReservation = useCallback(() => {
+        if (!user) return;
+        getMyReservation(user.userId)
+            .then(setReservation)
+            .finally(() => setIsLoading(false));
+    }, [user]);
+
     // Recarrega sempre que a tela volta a ficar visível (ex.: depois de reservar/cancelar).
     useFocusEffect(
         useCallback(() => {
-            if (!user) return;
             setIsLoading(true);
-            getMyReservation(user.userId)
-                .then(setReservation)
-                .finally(() => setIsLoading(false));
-        }, [user])
+            loadReservation();
+        }, [loadReservation])
     );
+
+    // Android: quando o tempo da reserva acaba, o card some sozinho.
+    const secondsLeft = useCountdown(reservation?.reservedBy?.expiresAt, loadReservation);
 
     const searchCard = (
         <Card style={isWide && styles.column}>
@@ -67,6 +75,12 @@ export default function Home() {
                         <MachineStatus available={false} />
                     </View>
                     <Text style={styles.cardText}>{reservation.model} · {reservation.year}</Text>
+                    {secondsLeft !== null && (
+                        <Text style={styles.cardText}>
+                            Cancelamento automático em{' '}
+                            <Text style={styles.countdown}>{formatCountdown(secondsLeft)}</Text>
+                        </Text>
+                    )}
                     <Button
                         title="Ver máquina"
                         variant="outline"
@@ -156,6 +170,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+    },
+    countdown: {
+        color: Colors.txtPrimary,
+        fontWeight: '900',
+        fontVariant: ['tabular-nums'],
     },
     machineCode: {
         color: Colors.txtPrimary,

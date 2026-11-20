@@ -27,7 +27,8 @@ O morador lê o QR Code da máquina (Android) ou digita o código (Android e Web
 
 ```
 lavamo/
-├── bd.json                       # 5 máquinas (carga inicial do "banco")
+├── bd.json                       # 5 máquinas (carga inicial do banco)
+├── docs/banco-de-dados.md        # diagrama e regras do banco SQLite (Android)
 ├── docs/qrcodes/                 # QR Codes das máquinas para a demonstração
 ├── assets/images/logo-lavamo.png # logo oficial (troque o arquivo para mudar)
 └── src/
@@ -39,9 +40,9 @@ lavamo/
     │   ├── (app)/(tabs)/         # Início, Escanear, Perfil (abas no Android)
     │   ├── (app)/machine/[code]  # detalhe da máquina + reservar/cancelar
     │   └── api/login/v1/         # proxy da API de login (só Web)
-    ├── integration/              # acesso a dados (HTTP com cookie e "banco" local)
+    ├── integration/              # acesso a dados (HTTP com cookie, SQLite no Android, AsyncStorage na Web, notificações)
     ├── context/                  # sessão do usuário (AuthCookieContext)
-    ├── hooks/                    # useMachine
+    ├── hooks/                    # useMachine, useCountdown
     ├── components/               # alert (android/ios/web), button, input, card...
     ├── constants/                # cores (preto e branco)
     ├── utils/                    # authProxy (repasse servidor → API)
@@ -73,4 +74,7 @@ Para testar a câmera, abra uma imagem de `docs/qrcodes/` na tela do PC e aponte
 
 - Cada usuário pode usar **no máximo 1 máquina** por vez.
 - Só quem reservou pode cancelar a reserva.
+- **Android:** a reserva é cancelada automaticamente depois de **1 minuto** (tempo curto para a demonstração), e o usuário recebe uma **notificação** no celular. Ainda é possível cancelar manualmente antes disso.
+- **Android:** os dados ficam num banco **SQLite** no aparelho. Veja o diagrama em [docs/banco-de-dados.md](docs/banco-de-dados.md).
+- **Web:** os dados ficam no AsyncStorage (localStorage), sem expiração automática.
 - Os dados ficam em cada aparelho/navegador. Para voltar ao estado do `bd.json`, limpe os dados do site (DevTools → Application → Clear site data) ou os dados do app no Android.

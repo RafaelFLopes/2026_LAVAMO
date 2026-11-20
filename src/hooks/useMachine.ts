@@ -7,6 +7,7 @@ import {
   MachineError,
   reserveMachine,
 } from '@/integration/machineIntegration';
+import { useCountdown } from './useCountdown';
 
 type ActionResult = { ok: boolean; message: string };
 
@@ -67,5 +68,9 @@ export function useMachine(code: string, user: User | null) {
 
   const isMine = !!user && machine?.reservedBy?.userId === user.userId;
 
-  return { machine, isLoading, isSaving, isMine, error, reserve, cancel, reload };
+  // Android: segundos até o cancelamento automático. Ao zerar, recarrega e a máquina aparece livre.
+  // Na Web a reserva não tem prazo, então fica null.
+  const secondsLeft = useCountdown(machine?.reservedBy?.expiresAt, reload);
+
+  return { machine, isLoading, isSaving, isMine, secondsLeft, error, reserve, cancel, reload };
 }

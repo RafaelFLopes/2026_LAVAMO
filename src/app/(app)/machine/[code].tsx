@@ -4,6 +4,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 
 import { useAuthCookie } from '@/context/AuthCookieContext';
 import { useMachine } from '@/hooks/useMachine';
+import { formatCountdown } from '@/hooks/useCountdown';
 import { Card } from '@/components/card';
 import { Button } from '@/components/button';
 import { Alert } from '@/components/alert';
@@ -21,7 +22,7 @@ function formatTime(iso: string) {
 export default function MachineDetail() {
     const { code } = useLocalSearchParams<{ code: string }>();
     const { user } = useAuthCookie();
-    const { machine, isLoading, isSaving, isMine, error, reserve, cancel } = useMachine(code, user);
+    const { machine, isLoading, isSaving, isMine, secondsLeft, error, reserve, cancel } = useMachine(code, user);
     const { width } = useWindowDimensions();
     const isWide = isWeb && width >= WIDE_BREAKPOINT;
 
@@ -65,6 +66,13 @@ export default function MachineDetail() {
                     <Text style={styles.actionText}>
                         Você está usando esta máquina desde {formatTime(machine.reservedBy!.reservedAt)}.
                     </Text>
+                    {secondsLeft !== null && (
+                        <View style={styles.timerBox}>
+                            <Text style={styles.timerLabel}>Cancelamento automático em</Text>
+                            <Text style={styles.timerValue}>{formatCountdown(secondsLeft)}</Text>
+                            <Text style={styles.timerHint}>Você receberá uma notificação quando o tempo acabar.</Text>
+                        </View>
+                    )}
                     <Button title="Cancelar reserva" variant="outline" onPress={() => handleAction(cancel)} loading={isSaving} />
                 </>
             );
@@ -75,6 +83,9 @@ export default function MachineDetail() {
                 <Text style={styles.busyLabel}>Em uso por</Text>
                 <Text style={styles.busyUser}>{machine.reservedBy?.username}</Text>
                 <Text style={styles.busySince}>desde {formatTime(machine.reservedBy!.reservedAt)}</Text>
+                {secondsLeft !== null && (
+                    <Text style={styles.busySince}>libera em {formatCountdown(secondsLeft)}</Text>
+                )}
             </View>
         );
     }
@@ -200,6 +211,32 @@ const styles = StyleSheet.create({
         color: Colors.txtSecondary,
         fontSize: 15,
         lineHeight: 22,
+    },
+    timerBox: {
+        borderWidth: 1.5,
+        borderColor: Colors.black,
+        borderRadius: 12,
+        padding: 16,
+        gap: 2,
+        alignItems: 'center',
+    },
+    timerLabel: {
+        color: Colors.txtMuted,
+        fontSize: 12,
+        fontWeight: '700',
+        letterSpacing: 1,
+        textTransform: 'uppercase',
+    },
+    timerValue: {
+        color: Colors.txtPrimary,
+        fontSize: 36,
+        fontWeight: '900',
+        fontVariant: ['tabular-nums'],
+    },
+    timerHint: {
+        color: Colors.txtSecondary,
+        fontSize: 13,
+        textAlign: 'center',
     },
     busyBox: {
         backgroundColor: Colors.black,
